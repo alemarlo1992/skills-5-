@@ -20,7 +20,7 @@ class Human(db.Model):
     __tablename__ = "humans"
 
     # Define your columns and/or relationships here
-    human_id = db.Column(db.Interger, primary_key=True, autoincrement=True)
+    human_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     fname = db.Column(db.String(20), nullable=False)
     lname = db.Column(db.String(20), nullable=False) 
     email = db.Column(db.String(64), nullable=True, unique=True)
@@ -38,11 +38,11 @@ class Animal(db.Model):
     __tablename__ = "animals"
 
     # Define your columns and/or relationships here
-    animal_id = db.Column(db.Interger, primary_key=True, autoincrement=True)
-    human_id = db.Column(db.Interger, db.ForeignKey('humans.human_id'))
+    animal_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    human_id = db.Column(db.Integer, db.ForeignKey('humans.human_id'))
     name = db.Column(db.String(20), nullable=False)
     animal_species = db.Column(db.String(20), nullable=False)
-    birth_year = db.Column(db.DateTime.year, nullable=True)
+    birth_year = db.Column(db.DateTime, nullable=True)
 
     human = db.relationship("Human", 
                             backref=db.backref("animals", 
