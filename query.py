@@ -92,12 +92,12 @@ def print_directory():
     """Print all Humans and their corresponding animal 
         and also the animal specie"""
 
-    humans = Human.query.all()
+    humans = Human.query.all() #created an onject named humans that gets all the humans in db 
 
-    for human in humans: 
-        for animal in human.animals:
-            print(human.fname, human.lname)
-            print(animal.name, "(",animal.animal_species,")")
+    for human in humans: #loop over that list 
+        for animal in human.animals: #loop over the animals for each corresponding human 
+            print(human.fname, human.lname) #print their name and last name 
+            print(animal.name, "(",animal.animal_species,")") #prints the animal name and specie that each human owns 
 
 
 
@@ -106,14 +106,15 @@ def print_directory():
 #    that species.
 
 def find_humans_by_animal_species(species):
-    """Replace this with a good docstring."""
+    """Print a list of humans that owe the animal species name"""
 
-    animals = Animal.query.filter_by(animal_species=species).all()
+    animals = Animal.query.filter_by(animal_species=species).all() #created a query that returns all the animals with that species name 
 
-    human_list = []
-    for animal in animals: 
-        human = animal.human.fname
-        human_list.append(human)
+    human_list = [] #empty list to add all the humans with that specie
+
+    for animal in animals: #loop over the query 
+        human = animal.human.fname #find the name of that human 
+        human_list.append(human) #append it to the empty list 
 
     print(human_list)
 
