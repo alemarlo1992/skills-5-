@@ -41,7 +41,7 @@ def q3():
 def q4():
     """Return the humans with first names that start with 'J'."""
 
-    fname_j = Human.query.filter(Human.fname.like('%J%')).all()
+    fname_j = Human.query.filter(Human.fname.ilike('%J%')).all()
 
     return fname_j
 
@@ -54,7 +54,7 @@ def q5():
     return animal_null
 
 
-def q4():
+def q6():
     """Return all animals whose species is 'fish' OR 'rabbit'."""
 
     fish_rabbit = Animal.query.filter( (Animal.animal_species == 'rabbit') | (Animal.animal_species == 'fish')).all()
@@ -62,12 +62,12 @@ def q4():
     return fish_rabbit
 
 
-def q5():
+def q7():
     """Return all humans whose email addresses do NOT contain 'gmail'."""
 
-    not_gmail = Human.query.filter_by(email != contains("gmail")).all()
+    not_gmail = Human.query.filter(~Human.email.like('%gmail%')).all()
 
-    return not_gmail
+    print(not_gmail)
 
 
 ##############################################################################
@@ -124,6 +124,7 @@ if __name__ == "__main__":
     from model import connect_to_db
 
     connect_to_db(app)
+    q7()
     # print_directory()
     # find_humans_by_animal_species(species)
 
