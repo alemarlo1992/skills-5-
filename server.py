@@ -18,7 +18,7 @@ def homepage():
     """Show the homepage."""
 
     return render_template("index.html")
-
+    
 
 @app.route("/api/human/<int:human_id>")
 def get_human(human_id):

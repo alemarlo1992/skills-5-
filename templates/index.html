@@ -63,14 +63,12 @@
 
         const selectedId = $('#human-id').val();
 
-        alert(selectedId);
-        // Replace the function call on the line above.
-        //
-        // Instead of alerting the user, you need to make an AJAX request to
-        // retrieve data about a human.
-        //
-        // Once you retrieve the data, replace the HTML in #fname,
-        // #lname, and #email with the server's response
+
+        $.get('api/human/'+ selectedId, (data) => {
+          $('#fname').html(data['fname'])
+          $('#lname').html(data['lname'])
+          $('#email').html(data['email'])
+        })
       });
     </script>
   </body>
