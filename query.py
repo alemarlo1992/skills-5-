@@ -108,7 +108,14 @@ def print_directory():
 def find_humans_by_animal_species(species):
     """Replace this with a good docstring."""
 
-    # Replace this with your code
+    animals = Animal.query.filter_by(animal_species=species).all()
+
+    human_list = []
+    for animal in animals: 
+        human = animal.human.fname
+        human_list.append(human)
+
+    print(human_list)
 
 
 if __name__ == "__main__":
@@ -116,5 +123,6 @@ if __name__ == "__main__":
     from model import connect_to_db
 
     connect_to_db(app)
-    print_directory()
+    # print_directory()
+    # find_humans_by_animal_species(species)
 
