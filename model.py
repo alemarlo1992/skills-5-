@@ -21,6 +21,7 @@ class Human(db.Model):
 
     # Define your columns and/or relationships here
     human_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+
     fname = db.Column(db.String(20), nullable=False)
     lname = db.Column(db.String(20), nullable=False) 
     email = db.Column(db.String(64), nullable=True, unique=True)
@@ -30,6 +31,7 @@ class Human(db.Model):
         """Return a human-readable representation of a Human."""
 
         return f"<Human human_id = {self.human_id}, fname = {self.fname}, email= {self.email}>"
+
 
 
 class Animal(db.Model):
@@ -45,8 +47,7 @@ class Animal(db.Model):
     birth_year = db.Column(db.DateTime, nullable=True)
 
     human = db.relationship("Human", 
-                            backref=db.backref("animals", 
-                                                order_by=animal_id))
+                            backref=db.backref("animals"))
 
 
     def __repr__(self):

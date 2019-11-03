@@ -15,14 +15,17 @@ from model import db, Human, Animal
 
 def q1():
     """Return the human with the id 2."""
+    human = Human.query.filter_by(human_id = 2).first()
 
-    return # Write your query here
+    return human
 
 
 def q2():
     """Return the FIRST animal with the species 'fish'."""
 
-    return # Write your query here
+    animal_fish = Animal.query.filter_by(animal_species = 'fish').first()
+
+    return animal_fish 
 
 
 def q3():
@@ -30,32 +33,41 @@ def q3():
 
     Do NOT include animals without birth years.
     """
+    animal_2015 = Animal.query.filter(Animal.birth_year > 2015).all()
 
-    return # Write your query here
+    return animal_2015
 
 
 def q4():
     """Return the humans with first names that start with 'J'."""
 
-    return # Write your query here
+    fname_j = Human.query.filter(Human.fname.like('%J%')).all()
+
+    return fname_j
 
 
 def q5():
     """Return all animals whose birth years are NULL in the database."""
 
-    return # Write your query here
+    animal_null = Animal.query.filter(Animal.birth_year == None).all()
+
+    return animal_null
 
 
 def q4():
     """Return all animals whose species is 'fish' OR 'rabbit'."""
 
-    return # Write your query here
+    fish_rabbit = Animal.query.filter( (Animal.animal_species == 'rabbit') | (Animal.animal_species == 'fish')).all()
+
+    return fish_rabbit
 
 
 def q5():
     """Return all humans whose email addresses do NOT contain 'gmail'."""
 
-    return # Write your query here
+    not_gmail = Human.query.filter_by(email != contains("gmail")).all()
+
+    return not_gmail
 
 
 ##############################################################################
@@ -77,9 +89,16 @@ def q5():
 #           Animal name (animal species)
 
 def print_directory():
-    """Replace this with a good docstring."""
+    """Print all Humans and their corresponding animal 
+        and also the animal specie"""
 
-    # Replace this with your code
+    humans = Human.query.all()
+
+    for human in humans: 
+        for animal in human.animals:
+            print(human.fname, human.lname)
+            print(animal.name, "(",animal.animal_species,")")
+
 
 
 # 2. Write a function, find_humans_by_animal_species, which takes in an animal
@@ -97,3 +116,5 @@ if __name__ == "__main__":
     from model import connect_to_db
 
     connect_to_db(app)
+    print_directory()
+
